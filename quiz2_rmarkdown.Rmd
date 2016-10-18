@@ -1,0 +1,63 @@
+---
+title:  "6060 Practice: RMarkdown"
+author: "Brooke Charbonneau"
+output:
+  pdf_document:
+    number_sections: yes
+    toc_depth: 3
+---
+
+```{r,echo=FALSE,message=FALSE, warning=FALSE}
+# Code goes in blocks like this
+
+# load libraries
+library(tidyverse)
+library(apaTables)
+
+#Load data 
+analytic_data        <- read_csv("analytic_data.csv")
+analytic_data_part2       <- read_csv("analytic_data_part2.csv")
+analytic_data_male40        <- read_csv("analytic_data_male40.csv")
+
+```
+
+# Correlations
+
+Below are the correlations among the variables for all participants (men and women).
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+apa.cor.table(analytic_data_part2,filename="Table1.doc",table.number=1)     
+```
+
+\pagebreak
+
+# Correlations for males over 40
+
+Below are the correlations among the variables for males over the age of 40.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+apa.cor.table(analytic_data_part2,filename="Table1.doc",table.number=1)
+```
+
+\pagebreak
+
+#Agreeableness and extraversion
+
+Below is a scatter plot between agreeableness and extraversion for men over the age of 40.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+my.scatter <- qplot(x=agreeableness,y=extraversion,data=analytic_data_male40)
+my.scatter <- my.scatter + geom_smooth(method = "lm", se = FALSE, color='black')
+my.scatter <- my.scatter + labs(title="Agreeableness and Extraversion for Men Over the Age of 40",
+                                x="Agreeableness",y="Extraversion")
+my.scatter <- my.scatter + theme_classic()
+my.scatter <- my.scatter + theme(axis.line.x = element_line(colour = 'black',size=0.5, linetype='solid'),
+                                 axis.line.y = element_line(colour = 'black', size=0.5, linetype='solid'))
+
+print(my.scatter)
+```
+
+In men over the age of 40, there was a positive relation between agreeableness and extraversion, r=.40, 95% CI[.33, .47].
+
