@@ -60,12 +60,12 @@ apa.cor.table(analytic_data_part2,filename="Table1.doc",table.number=1)
 
 ## Corr Table Men 40+
 analytic_data_male40 <- filter(analytic_data, gender=="Male")
-analytic_data_male40 <- analytic_data %>% filter(age>40) %>% select(-gender)
+analytic_data_male40 <- analytic_data_male40 %>% filter(age>40) %>% select(-gender)
 ## View(analytic_data_male40)
-apa.cor.table(analytic_data_male40,filename="Table2.doc",table.number=2)
+apa.cor.table(analytic_data_male40,filename="Table2-update.doc",table.number=2)
 
 ## Save data sets
-write_csv(analytic_data_male40,path="analytic_data_male40.csv")
+write_csv(analytic_data_male40-update,path="analytic_data_male40.csv")
 write_csv(analytic_data_part2,path="analytic_data_part2.csv")
 
 ## Create Agree-Extra Scatter Plot
@@ -78,5 +78,5 @@ my.scatter <- my.scatter + theme(axis.line.x = element_line(colour = 'black',siz
                                  axis.line.y = element_line(colour = 'black', size=0.5, linetype='solid'))
 
 print(my.scatter)
-ggsave(filename="Figure1.pdf", plot=my.scatter, width=6,height=6, units="in")
+ggsave(filename="Figure1-update.pdf", plot=my.scatter, width=6,height=6, units="in")
 
